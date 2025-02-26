@@ -1,0 +1,34 @@
+/*
+____________________________________________________________________________
+Créations de la base de donées 'DataWarehouse' en vérifiant son existance.
+Création de nos 3 shémas : Bronze, Silver et Gold.
+____________________________________________________________________________
+*/
+
+-- Utiliser la base de données DataWarehouse
+USE DataWarehouse;
+GO
+IF NOT EXISTS (
+    SELECT name FROM master.sys.databases 
+    WHERE name = 'DataWarehouse'
+)
+BEGIN
+    CREATE DATABASE DataWarehouse;
+    PRINT 'Base de données créée';
+END
+ELSE
+BEGIN
+    PRINT 'La base de données existe déjà';
+END
+GO
+
+-- Créer les schémas 
+USE DataWarehouse
+GO
+CREATE SCHEMA Bronze;
+GO
+CREATE SCHEMA Silver;
+GO
+CREATE SCHEMA Gold;
+GO
+
