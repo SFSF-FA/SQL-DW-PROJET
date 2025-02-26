@@ -5,3 +5,4 @@ Cours suivi (**DATA WITH BARAA**) pour création d'un DW avec SQL sever, ETL, mo
 Débutant dans l'analyse des données. 
 
 Données et sources de Mr Baraa : https://datawithbaraa.substack.com/
+Ajout d'une nouvelle ligne 
