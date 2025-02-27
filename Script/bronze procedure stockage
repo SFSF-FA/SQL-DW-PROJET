@@ -1,0 +1,99 @@
+-- Procédure bronze_load, début et fin
+-- Vidages et chargements de nos données bronze, sources fichiers csv crm et erp.
+-- Execution de la procédure du stockage bronze_load
+
+----------------------------------------------------------------------------------
+
+
+-- Utiliser la base de données DataWarehouse
+USE DataWarehouse
+GO
+
+-- Création ou modification de la procédure stockée bronze_load
+CREATE OR ALTER PROCEDURE bronze_load
+AS
+BEGIN
+    -- Message indiquant le début de la procédure
+    PRINT 'Début de la procédure bronze_load';
+
+    -- Vider la table Bronze.crm_prd_info avant l'insertion
+    PRINT 'Vidage de la table Bronze.crm_prd_info';
+    TRUNCATE TABLE Bronze.crm_prd_info;
+    
+    -- Charger les données à partir du fichier CSV
+    PRINT 'Chargement des données dans Bronze.crm_prd_info';
+    BULK INSERT Bronze.crm_prd_info
+    FROM 'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_crm\prd_info.csv'
+    WITH
+    (
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    -- Vider la table Bronze.crm_sales_details avant l'insertion
+    PRINT 'Vidage de la table Bronze.crm_sales_details';
+    TRUNCATE TABLE Bronze.crm_sales_details;
+    
+    -- Charger les données à partir du fichier CSV
+    PRINT 'Chargement des données dans Bronze.crm_sales_details';
+    BULK INSERT Bronze.crm_sales_details
+    FROM 'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_crm\sales_details.csv'
+    WITH
+    (
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    -- Vider la table bronze.erp_cust_az12 avant l'insertion
+    PRINT 'Vidage de la table bronze.erp_cust_az12';
+    TRUNCATE TABLE bronze.erp_cust_az12;
+    
+    -- Charger les données à partir du fichier CSV
+    PRINT 'Chargement des données dans bronze.erp_cust_az12';
+    BULK INSERT bronze.erp_cust_az12
+    FROM 'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\CUST_AZ12.csv'
+    WITH
+    (
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    -- Vider la table Bronze.erp_loc_a101 avant l'insertion
+    PRINT 'Vidage de la table Bronze.erp_loc_a101';
+    TRUNCATE TABLE Bronze.erp_loc_a101;
+    
+    -- Charger les données à partir du fichier CSV
+    PRINT 'Chargement des données dans Bronze.erp_loc_a101';
+    BULK INSERT Bronze.erp_loc_a101
+    FROM 'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\LOC_A101.csv'
+    WITH
+    (
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    -- Vider la table Bronze.erp_px_cat_g1v2 avant l'insertion
+    PRINT 'Vidage de la table Bronze.erp_px_cat_g1v2';
+    TRUNCATE TABLE Bronze.erp_px_cat_g1v2;
+    
+    -- Charger les données à partir du fichier CSV
+    PRINT 'Chargement des données dans Bronze.erp_px_cat_g1v2';
+    BULK INSERT Bronze.erp_px_cat_g1v2
+    FROM 'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\PX_CAT_G1V2.csv'
+    WITH
+    (
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        TABLOCK
+    );
+
+    -- Message indiquant la fin de la procédure
+    PRINT 'Fin de la procédure bronze_load';
+END;
+
+
+--EXEC [dbo].[bronze_load]
