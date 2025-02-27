@@ -1,0 +1,48 @@
+-- BULK INSERT LES TABLES BRONZE ERP SOURCES CSV.
+
+USE DataWarehouse
+GO
+
+TRUNCATE TABLE bronze.erp_cust_az12
+BULK INSERT    bronze.erp_cust_az12
+FROM  'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\CUST_AZ12.csv'
+WITH
+(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+	)
+GO
+
+--select * from [Bronze].[erp_cust_az12] WHERE YEAR(BDATE) = 9999
+
+TRUNCATE TABLE Bronze.erp_loc_a101
+BULK INSERT    Bronze.erp_loc_a101
+FROM  'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\LOC_A101.csv'
+WITH
+(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+	)
+GO
+
+TRUNCATE TABLE Bronze.erp_px_cat_g1v2
+BULK INSERT    Bronze.erp_px_cat_g1v2
+FROM  'C:\Users\sefas\Documents\SQL Server Management Studio\Scripts SQL_DW_PROJET\datasets\source_erp\PX_CAT_G1V2.csv'
+WITH
+(
+	FIRSTROW = 2,
+	FIELDTERMINATOR = ',',
+	TABLOCK
+	)
+GO
+
+
+-- Vérification : avec les csv. sources le nbr lignes et colonnes 
+		--SELECT *			FROM [Bronze].[erp_cust_az12]
+		--SELECT *			FROM [Bronze].[erp_loc_a101]
+		--SELECT *			FROM [Bronze].[erp_loc_a101]
+		--SELECT COUNT (*)	FROM [Bronze].[erp_cust_az12]
+		--SELECT COUNT (*)	FROM [Bronze].[erp_loc_a101]
+		--SELECT COUNT (*)	FROM [Bronze].[erp_px_cat_g1v2]
